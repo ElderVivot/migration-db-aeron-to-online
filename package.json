@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ts-node src/aeron/companie.repository.ts"
+    "test": "ts-node src/bayhero/companie.ts"
   },
   "author": "",
   "license": "ISC",
