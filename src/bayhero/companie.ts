@@ -49,7 +49,7 @@ function mountDataCompanieToSave(companie: ICompanieAeron) {
     }    
 }
 
-export async function process() {
+export async function saveCompanies(tenant: string) {
     try {
         const dataCompanies = await exportCompanies()
         if(dataCompanies && dataCompanies.length > 0){
@@ -60,7 +60,7 @@ export async function process() {
                         data, 
                         {
                             headers: {
-                                tenant: "73c2f212-ef87-4"
+                                tenant
                             }
                         }
                     )
@@ -76,5 +76,3 @@ export async function process() {
         console.log(error)
     }
 }
-
-process().then(_ => console.log(_))
