@@ -1,5 +1,5 @@
 import {api} from '../api'
-import {formatDate} from '../utils'
+import {formatDate, formatDateTimeZone} from '../utils'
 import {exportLogNfeNfceGO, ILogNfeNfceGOAeron} from '../aeron/log_nfe_nfce_go.repository'
 import axios from 'axios'
 
@@ -11,6 +11,7 @@ function correlationSituationNotaFiscal(situationNotaFiscal: string) {
 
 function mountDataLogNfeNfceGOToSave(logNfeNfceGO: ILogNfeNfceGOAeron) {
     return {
+        updatedAt: formatDateTimeZone(logNfeNfceGO.updatedAt),
         federalRegistration: logNfeNfceGO.cgceCompanie,
         modelNotaFiscal: logNfeNfceGO.modelNF,
         situationNotaFiscal: correlationSituationNotaFiscal(logNfeNfceGO.situacaoNF),
@@ -24,7 +25,8 @@ function mountDataLogNfeNfceGOToSave(logNfeNfceGO: ILogNfeNfceGOAeron) {
         qtdNotesDown: logNfeNfceGO.qtdNotesDown,
         qtdTimesReprocessed: logNfeNfceGO.qtdTimesReprocessed,
         pageInicial: logNfeNfceGO.pageInicial,
-        pageFinal: logNfeNfceGO.pageFinal
+        pageFinal: logNfeNfceGO.pageFinal,
+        qtdPagesTotal: logNfeNfceGO.qtdPagesTotal
     }    
 }
 
@@ -35,6 +37,7 @@ export async function saveLogNotes(tenant: string) {
             for(const logNfeNfceGO of dataLogNfeNfceGO) {
                 try {
                     const data = mountDataLogNfeNfceGOToSave(logNfeNfceGO)
+                    console.log(data)
                     const result = await api.post("/log_nota_fiscal", data, { headers: { tenant } })
                     console.log(result.data)
                 } catch (error) {
