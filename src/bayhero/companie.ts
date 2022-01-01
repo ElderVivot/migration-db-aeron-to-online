@@ -62,7 +62,10 @@ export async function saveCompanies(tenant: string) {
                     console.log(result.data)
                 } catch (error) {
                     console.log('----------------------------------')
-                    if(axios.isAxiosError(error)) console.log(error.response?.data)
+                    if(axios.isAxiosError(error)) {
+                        console.log(error.response?.data)
+                        console.log(error.response?.config.data)
+                    }
                     else console.log(error)
                 }
             }

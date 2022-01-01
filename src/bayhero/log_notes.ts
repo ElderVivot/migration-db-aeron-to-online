@@ -37,12 +37,14 @@ export async function saveLogNotes(tenant: string) {
             for(const logNfeNfceGO of dataLogNfeNfceGO) {
                 try {
                     const data = mountDataLogNfeNfceGOToSave(logNfeNfceGO)
-                    console.log(data)
                     const result = await api.post("/log_nota_fiscal", data, { headers: { tenant } })
                     console.log(result.data)
                 } catch (error) {
                     console.log('----------------------------------')
-                    if(axios.isAxiosError(error)) console.log(error.response?.data)
+                    if(axios.isAxiosError(error)) {
+                        console.log(error.response?.data)
+                        console.log(error.response?.config.data)
+                    }
                     else console.log(error)
                 }
             }
