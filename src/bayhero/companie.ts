@@ -1,4 +1,5 @@
 import {api} from '../api'
+import {formatDate} from '../utils'
 import {exportCompanies, ICompanieAeron} from '../aeron/companies.repository'
 import axios from 'axios'
 
@@ -40,9 +41,9 @@ function mountDataCompanieToSave(companie: ICompanieAeron) {
         zipCode: "",
         complement: "",
         referency: "",
-        dateInicialAsCompanie: companie.dateInicialAsCompanie,
-        dateInicialAsClient: companie.dateInicialAsClient,
-        dateFinalAsClient: companie.dateFinalAsClient,
+        dateInicialAsCompanie: formatDate(companie.dateInicialAsCompanie),
+        dateInicialAsClient: formatDate(companie.dateInicialAsClient),
+        dateFinalAsClient: formatDate(companie.dateFinalAsClient),
         cnaes: "",
         taxRegime: correlationTaxRegime(companie.regimeFiscal),
         idIbgeCity: 520008
@@ -56,14 +57,8 @@ export async function saveCompanies(tenant: string) {
             for(const companie of dataCompanies) {
                 try {
                     const data = mountDataCompanieToSave(companie)
-                    const result = await api.post("/companie", 
-                        data, 
-                        {
-                            headers: {
-                                tenant
-                            }
-                        }
-                    )
+                    console.log(data)
+                    const result = await api.post( "/companie", { headers: {tenant } } )
                     console.log(result.data)
                 } catch (error) {
                     console.log('----------------------------------')

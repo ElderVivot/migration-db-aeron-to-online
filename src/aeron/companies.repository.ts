@@ -15,9 +15,9 @@ export interface ICompanieAeron {
     fone: string    
     email: string    
     ramo: string    
-    dateInicialAsCompanie: string    
-    dateInicialAsClient: string    
-    dateFinalAsClient: string    
+    dateInicialAsCompanie: Date    
+    dateInicialAsClient: Date    
+    dateFinalAsClient: Date    
     inscricaoEstadual: string    
     inscricaoMunicipal: string    
     uf: string    

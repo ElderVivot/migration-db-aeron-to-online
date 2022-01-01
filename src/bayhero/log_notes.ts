@@ -1,4 +1,5 @@
 import {api} from '../api'
+import {formatDate} from '../utils'
 import {exportLogNfeNfceGO, ILogNfeNfceGOAeron} from '../aeron/log_nfe_nfce_go.repository'
 import axios from 'axios'
 
@@ -13,8 +14,8 @@ function mountDataLogNfeNfceGOToSave(logNfeNfceGO: ILogNfeNfceGOAeron) {
         federalRegistration: logNfeNfceGO.cgceCompanie,
         modelNotaFiscal: logNfeNfceGO.modelNF,
         situationNotaFiscal: correlationSituationNotaFiscal(logNfeNfceGO.situacaoNF),
-        dateStartDown: logNfeNfceGO.dateStartDown,
-        dateEndDown: logNfeNfceGO.dateEndDown,
+        dateStartDown: formatDate(logNfeNfceGO.dateStartDown),
+        dateEndDown: formatDate(logNfeNfceGO.dateEndDown),
         typeLog: logNfeNfceGO.typeLog,
         messageLog: logNfeNfceGO.messageLog,
         messageLogToShowUser: logNfeNfceGO.messageLogToShowUser,
@@ -34,14 +35,7 @@ export async function saveLogNotes(tenant: string) {
             for(const logNfeNfceGO of dataLogNfeNfceGO) {
                 try {
                     const data = mountDataLogNfeNfceGOToSave(logNfeNfceGO)
-                    const result = await api.post("/log_nota_fiscal", 
-                        data, 
-                        {
-                            headers: {
-                                tenant
-                            }
-                        }
-                    )
+                    const result = await api.post("/log_nota_fiscal", data, { headers: { tenant } })
                     console.log(result.data)
                 } catch (error) {
                     console.log('----------------------------------')
