@@ -57,8 +57,7 @@ export async function saveCompanies(tenant: string) {
             for(const companie of dataCompanies) {
                 try {
                     const data = mountDataCompanieToSave(companie)
-                    console.log(data)
-                    const result = await api.post( "/companie", { headers: {tenant } } )
+                    const result = await api.post( "/companie", data, { headers: {tenant } } )
                     console.log(result.data)
                 } catch (error) {
                     console.log('----------------------------------')
