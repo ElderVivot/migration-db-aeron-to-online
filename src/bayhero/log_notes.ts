@@ -11,7 +11,7 @@ function correlationSituationNotaFiscal(situationNotaFiscal: string) {
 
 function mountDataLogNfeNfceGOToSave(logNfeNfceGO: ILogNfeNfceGOAeron) {
     return {
-        updatedAt: formatDateTimeZone(logNfeNfceGO.updatedAt),
+        updatedAt: logNfeNfceGO.updatedAt,
         federalRegistration: logNfeNfceGO.cgceCompanie,
         modelNotaFiscal: logNfeNfceGO.modelNF,
         situationNotaFiscal: correlationSituationNotaFiscal(logNfeNfceGO.situacaoNF),
