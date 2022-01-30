@@ -25,13 +25,13 @@ function correlationTaxRegime(taxRegime: string) {
 
 function mountDataCompanieToSave(companie: ICompanieAeron) {
     return {
-        codeCompanieAccountSystem: companie.code,
+        codeCompanieAccountSystem: companie.code.toString(),
         name: companie.name,
         nickName: companie.nickName,
         typeFederalRegistration: correlationTypeCgce(companie.typeCgce),
         federalRegistration: companie.cgce,
-        stateRegistration: companie.inscricaoEstadual,
-        cityRegistration: companie.inscricaoMunicipal,
+        stateRegistration: companie.inscricaoEstadual.toString(),
+        cityRegistration: companie.inscricaoMunicipal.toString(),
         status: correlationStatus(companie.status),
         dddPhone: companie.ddd,
         phone: companie.fone,
